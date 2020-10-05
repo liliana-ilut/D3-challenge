@@ -67,38 +67,38 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("opacity", ".5");
 
     var circlesGroup = chartGroup.selectAll()
-        .data(healthData)
-        .enter()
-        .append("text")
-        .attr("x", d => xLinearScale(d.age))
-        .attr("y", d => yLinearScale(d.smokes))
-        .style("font-size", "13px")
-        .style("text-anchor", "middle")
-        .style('fill', 'white')
-        .text(d => (d.abbr));
+      .data(healthData)
+      .enter()
+      .append("text")
+      .attr("x", d => xLinearScale(d.age))
+      .attr("y", d => yLinearScale(d.smokes))
+      .style("font-size", "13px")
+      .style("text-anchor", "middle")
+      .style('fill', 'white')
+      .text(d => (d.abbr));
 
-    // Step 6: Initialize tool tip
-    // ==============================
-    var toolTip = d3.tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
-      .html(function(d) {
-        return (`${d.state}<br>Hair length: ${d.age}<br>Hits: ${d.smokes}`);
-      });
+    // // Step 6: Initialize tool tip
+    // // ==============================
+    // var toolTip = d3.tip()
+    //   .attr("class", "tooltip")
+    //   .offset([80, -60])
+    //   .html(function(d) {
+    //     return (`${d.state}<br>Hair length: ${d.age}<br>Hits: ${d.smokes}`);
+    //   });
 
-    // Step 7: Create tooltip in the chart
-    // ==============================
-    chartGroup.call(toolTip);
+    // // Step 7: Create tooltip in the chart
+    // // ==============================
+    // chartGroup.call(toolTip);
 
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
-    circlesGroup.on("click", function(data) {
-      toolTip.show(data, this);
-    })
-      // onmouseout event
-      .on("mouseout", function(data, index) {
-        toolTip.hide(data);
-      });
+    // // Step 8: Create event listeners to display and hide the tooltip
+    // // ==============================
+    // circlesGroup.on("click", function(data) {
+    //   toolTip.show(data, this);
+    // })
+    //   // onmouseout event
+    //   .on("mouseout", function(data, index) {
+    //     toolTip.hide(data);
+    //   });
 
     // Create axes labels
     chartGroup.append("text")
@@ -107,12 +107,12 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Number of Billboard 100 Hits");
+      .text("Smokes (%)");
 
     chartGroup.append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
+      .text("Age (Median)");
   }).catch(function(error) {
     console.log(error);
   });
