@@ -57,11 +57,11 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     // Step 5: Create Circles
     // ==============================
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(hairData)
+    .data(healthData)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.hair_length))
-    .attr("cy", d => yLinearScale(d.num_hits))
+    .attr("cx", d => xLinearScale(d.age))
+    .attr("cy", d => yLinearScale(d.smokes))
     .attr("r", "15")
     .attr("fill", "pink")
     .attr("opacity", ".5");
@@ -72,7 +72,7 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-        return (`${d.rockband}<br>Hair length: ${d.hair_length}<br>Hits: ${d.num_hits}`);
+        return (`${d.state}<br>Hair length: ${d.age}<br>Hits: ${d.smokes}`);
       });
 
     // Step 7: Create tooltip in the chart
