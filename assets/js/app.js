@@ -63,8 +63,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     .attr("cx", d => xLinearScale(d.age))
     .attr("cy", d => yLinearScale(d.smokes))
     .attr("r", "15")
-    .attr("fill", "green")
-    .attr("opacity", ".5");
+    .attr("fill", "darkorange")
+    .attr("opacity", ".7");
 
     var circlesGroup = chartGroup.selectAll()
       .data(healthData)
@@ -74,7 +74,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("y", d => yLinearScale(d.smokes))
       .style("font-size", "13px")
       .style("text-anchor", "middle")
-      .style('fill', 'white')
+      .style('fill', 'black')
+      .attr("opacity", ".4")
       .text(d => (d.abbr));
 
     // Create axes labels
