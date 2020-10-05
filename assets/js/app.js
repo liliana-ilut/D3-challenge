@@ -23,15 +23,15 @@ var chartGroup = svg.append("g")
 // Import Data
 d3.csv("assets/data/data.csv").then(function(healthData) {
 
-    // Step 1: Parse Data/Cast as numbers
-    // ==============================
+    // Parse Data/Cast as numbers
+
     healthData.forEach(function(data) {
       data.age = +data.age;
       data.smokes= +data.smokes;
     });
 
-    // Step 2: Create scale functions
-    // ==============================
+    // Create scale functions
+    
     var xLinearScale = d3.scaleLinear()
       .domain([20, d3.max(healthData, d => d.age)])
       .range([0, width]);
@@ -40,13 +40,13 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .domain([0, d3.max(healthData, d => d.smokes)])
       .range([height, 0]);
 
-    // Step 3: Create axis functions
-    // ==============================
+    // Create axis functions
+   
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
-    // Step 4: Append Axes to the chart
-    // ==============================
+    // Append Axes to the chart
+   
     chartGroup.append("g")
       .attr("transform", `translate(0, ${height})`)
       .call(bottomAxis);
@@ -54,8 +54,8 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
     chartGroup.append("g")
       .call(leftAxis);
 
-    // Step 5: Create Circles
-    // ==============================
+    //  Create Circles
+
     var circlesGroup = chartGroup.selectAll("circle")
     .data(healthData)
     .enter()
