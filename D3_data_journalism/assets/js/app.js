@@ -14,7 +14,7 @@ let width = svgWidth - margin.left - margin.right;
 let height = svgHeight - margin.top - margin.bottom;
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
-let svg = d3.select(".chart")
+let svg = d3.select("#scatter")
   .append("svg")
   .attr("width", svgWidth)
   .attr("height", svgHeight);
@@ -25,7 +25,7 @@ let chartGroup = svg.append("g")
 // Import Data
 let file= "assets/data/data.csv"
 d3.csv(file).then(successHandle, errorHandle);
-    // console.log(healthData);
+   
 
 function errorHandle(error){
     throw error;
@@ -33,6 +33,7 @@ function errorHandle(error){
 
 function successHandle(healthData){
     healthData.map(function(data) {
+         console.log(healthData);
         data.age= +data.age;
         data.smokes= +data.smokes;
     });
@@ -63,36 +64,35 @@ function successHandle(healthData){
 
     // Step 5: Create Circles
     
-    let circlesGroup = chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.selectAll("circle")
         .data(healthData)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d.age))
         .attr("cy", d => yLinearScale(d.smokes))
         .attr("r", "15")
-        .attr("fill", "pink")
+        .attr("fill", "green")
         .attr("opacity", ".5");
 
     // Append text to circles 
 
-    // let circlesGroup = chartGroup.selectAll()
-    //     .data(healthData)
-    //     .enter()
-    //     .append("text")
-    //     .attr("x", d => xLinearScale(d.age))
-    //     .attr("y", d => yLinearScale(d.smokes))
-    //     .style("font-size", "13px")
-    //     .style("text-anchor", "middle")
-    //     .style('fill', 'white')
-    //     .text(d => (d.abbr));
+    var circlesGroup = chartGroup.selectAll()
+        .data(healthData)
+        .enter()
+        .append("text")
+        .attr("x", d => xLinearScale(d.age))
+        .attr("y", d => yLinearScale(d.smokes))
+        .style("font-size", "13px")
+        .style("text-anchor", "middle")
+        .style('fill', 'white')
+        .text(d => (d.abbr));
 
 
     // Step 6: Initialize tool tip
    
-    let toolTip = d3.tip()
+    var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80, -60])
-        .html(function(d) {
+        .offset([80, -60]).html(function(d) {
         return (`${d.state}<br>Age: ${d.age}<br>Smokes: ${d.smokes}`);
         });
 
