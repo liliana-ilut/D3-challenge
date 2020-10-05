@@ -21,7 +21,8 @@ html {
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
-  background-image: url(/images/old_paper.jpg);
+  background-image: url("../images/parchment.jpg");
+  position: relative;
 }
 
 #footer {
