@@ -78,6 +78,29 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
       .attr("opacity", ".4")
       .text(d => (d.abbr));
 
+    // Initialize tool tip
+
+    var toolTip = d3.tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`<br> State: ${d.state}<br>Median Age: ${d.age}<br>Smokers(%): ${d.smokes}`);
+      });
+
+    // Create tooltip in the chart
+   
+    chartGroup.call(toolTip);
+
+    // Create event listeners to display and hide the tooltip
+   
+    circlesGroup.on("click", function(data) {
+      toolTip.show(data, this);
+    })
+      // onmouseout event
+      .on("mouseout", function(data, index) {
+        toolTip.hide(data);
+      });
+
     // Create axes labels
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
